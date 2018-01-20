@@ -1,0 +1,22 @@
+{
+  "name": "simpleexpress",
+  "version": "1.0.0",
+  "description": "express assignments",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mlpichardo1/CodeSchoolExpress.git"
+  },
+  "author": "Manny Pichardo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mlpichardo1/CodeSchoolExpress/issues"
+  },
+  "homepage": "https://github.com/Mlpichardo1/CodeSchoolExpress#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
