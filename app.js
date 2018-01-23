@@ -1,38 +1,35 @@
-// EXPRESS Level 1
 var express = require('express')
 var app = express();
 
-// var requestTime = function (request, response, next) {
-//   request.requestTime = Date.now()
-//   next()
-// }
-
-// app.use(requestTime)
-
-// app.get('/', function (request, response) {
-//   response.send('Hello World!')
-// })
-
-// app.get('/name', function (request, response) {
-//   response.send('Manny Pichardo')
-// })
-
-// app.get('/redirect', function(request, response) {
-//   response.redirect(301, '/surprise');
-// });
-
-// app.listen(process.env.PORT);
-
-// EXPRESS Level 2
-app.get('/cities', function (request, response) {                                                                                                     
-  var cities = ['Providence', 'Warwick', 'Lincoln', 'Cranston'];
-  response.json(cities);
+app.use(express.static('public')); //MIDDLEWARE
+// EXPRESS Level 3
+var cities = ['Providence', 'Warwick', 'Lincoln', 'Cranston', 'Johnston'];
+app.get("/cities", function(request, response) {
+  if(request.query.limit >= 0) {
+    response.json(citySearch.slice(0, request.query.limit));
+  } else if (request.query.limit > 5){
+     response.status(404).json
+  } else {
+       response.json(cities);
+  }
 });
 
-app.use(express.static('public')); //MIDDLEWARE
+function citySearch (keyword) {
+  var regexp = RegExp(keyword, 'i');
+  var result = cities.filter(function (city) {
+    return city.match(regexp);
+  });
 
-// app.get("/", function(request, response) {
-//   response.sendFile(__dirname + "/public/index.html");
-// });
+  return result;
+}
+
+app.get('/cities/:name', function (request, response) {
+  var cityInfo = cities[request.params.name];
+    if(cities[request.params.name]) {
+      response.json(cityInfo);
+    } else {
+      response.status(404).json("City not found");
+    }
+});
 
 app.listen(process.env.PORT);
