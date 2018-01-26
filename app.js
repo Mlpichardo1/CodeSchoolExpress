@@ -21,6 +21,7 @@ app.get('/cities/:name', function (request, response) {
   var description = cities[request.params.name];
     if(!description) {
       response.status(404).json('No description found for ' + request.params.name);
+      console.log(description);
     } else {
       response.json(description);
     }
@@ -33,17 +34,15 @@ app.get("/cities", function(request, response) {
   } else if (request.query.limit > 5){
      response.status(404).json
   } else {
-      response.json(cities);
-  
+      response.json(Object.keys(cities));
   }
 });
 
 function citySearch (keyword) {
   var regexp = RegExp(keyword, 'i');
-  var result = cities.filter(function (city) {
+  var result = cities.filter(function(city) {
     return city.match(regexp);
   });
-
   return result;
 }
 
@@ -72,7 +71,7 @@ app.post('/cities', parseUrlencoded, function (request, response) {
 
 // Delete route
 app.delete('/cities/:name', function (request, response) {
-delete cities[request.cityName];
+delete cities[request.cities];
     response.sendStatus(200);
 }); 
 
