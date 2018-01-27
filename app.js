@@ -1,6 +1,5 @@
 var express = require('express')
 var app = express();
-
 var logger = require('./logger');
 app.use(logger);
 
@@ -8,7 +7,10 @@ var bodyParser = require('body-parser');
 var parseUrlencoded = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static('public')); //MIDDLEWARE
-// EXPRESS Level 4
+// EXPRESS Level 5
+var blocks = require('./routes/block');
+app.use('/cities', blocks);
+
 var cities = {
   'Providence': 'RI', 
   'Bronx': 'NY',
