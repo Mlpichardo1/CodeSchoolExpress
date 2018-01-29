@@ -22,8 +22,10 @@ $(function(){
       $.ajax({
         type: 'DELETE', url: '/cities/' + target.data('city')
       }).done(function() {
-        target.parents('li').remove();
+        
       });
+       target.parents('li').remove();
+       console.log(city);
     });
   }
   
